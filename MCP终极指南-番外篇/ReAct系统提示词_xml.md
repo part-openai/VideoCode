@@ -13,7 +13,7 @@
 ```xml
 <task>埃菲尔铁塔有多高？</task>
 <thought>我需要找到埃菲尔铁塔的高度。可以使用搜索工具。</thought>
-<action>get_height("埃菲尔铁塔")`</action>`
+<action>get_height("埃菲尔铁塔")</action>
 <observation>埃菲尔铁塔的高度约为330米（包含天线）。</observation>
 <thought>搜索结果显示了高度。我已经得到答案了。</thought>
 <final_answer>埃菲尔铁塔的高度约为330米。</final_answer>
