@@ -49,3 +49,5 @@
 - 操作系统: MacOS 版本26.4.1 (25E253)
 - 当前目录: /Users/david/code/ai-agent
 - 目录下文件列表: 空
+
+<task>写一个贪吃蛇游戏，使用 HTML,css 和 js 实现，代码分别放在不同的文件中</task>  
