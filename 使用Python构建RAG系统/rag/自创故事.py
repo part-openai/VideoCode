@@ -1,6 +1,10 @@
 from typing import List
 
-# 切分文件中的文本到chunks列表
+# 文件名
+file_name = "自创故事.md"
+# 用户提问
+query = "故事中谁是大坏蛋？干过什么坏事？"
+##################### 切分文件中的文本到chunks列表 ##################
 def split_into_chunks(doc_file: str) -> List[str]:
     # 读取文件
     with open(doc_file, 'r') as f:
@@ -8,7 +12,7 @@ def split_into_chunks(doc_file: str) -> List[str]:
     return [chunk for chunk in content.split("\n\n")]
 
 
-chunks = split_into_chunks("大闹天宫.md")
+chunks = split_into_chunks(file_name)
 for i, chunk in enumerate(chunks):
     print(f'[{i}] {chunk}\n')
 
@@ -19,16 +23,16 @@ def embed_chunk(chunk: str) -> List[float]:
     embedding = embedding_model.encode(chunk)
     return embedding.tolist()
 
-# 测试
-test_embedding = embed_chunk("测试内容")
-# 向量维度
-print(len(test_embedding))
-# 向量内容
-print(test_embedding)
+# # 测试
+# test_embedding = embed_chunk("测试内容")
+# # 向量维度
+# print(len(test_embedding))
+# # 向量内容
+# print(test_embedding)
 
-# 将片段内容通过Embedding模型转成向量
+##################################### 将片段内容通过Embedding模型转成向量 ####################################
 embeddings = [embed_chunk(chunk) for chunk in chunks]
-print(len(embeddings))
+print(f"向量列表长度:{len(embeddings)}")
 
 
 ################ 将向量列表和片段内容，存到向量数据库 ################
@@ -61,7 +65,7 @@ def retrieve(query: str, top_k: int) -> List[str]:
 
 # 问题
 # query = "孙悟空被谁封印在了五指山，封贴是什么？"
-query = "孙悟空跟谁战斗过？简单描述一下战斗场景"
+
 # 召回
 retrieved_chunks = retrieve(query, 5)
 # 打印
@@ -107,9 +111,10 @@ def generate(query: str, chunks: List[str]) -> str:
 
     # 打印promot
     print(f"{prompt}\n\n---\n")
+    llm = "gemini-2.5-flash"
     # 回答
     response = google_client.models.generate_content(
-        model = "gemini-2.5-flash",
+        model = llm,
         contents=prompt
     )
     return response.text
