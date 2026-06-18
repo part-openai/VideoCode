@@ -12,6 +12,10 @@ import platform
 
 from prompt_template import react_system_prompt_template
 
+# BaseURL = "https://openrouter.ai/api/v1"
+# ModelId = "openai/gpt-4o"
+BaseURL = "https://api.siliconflow.cn/v1"
+ModelId = "deepseek-ai/DeepSeek-V4-Pro"
 
 class ReActAgent:
     def __init__(self, tools: List[Callable], model: str, project_directory: str):
@@ -19,7 +23,7 @@ class ReActAgent:
         self.model = model
         self.project_directory = project_directory
         self.client = OpenAI(
-            base_url="https://openrouter.ai/api/v1",
+            base_url = BaseURL,
             api_key=ReActAgent.get_api_key(),
         )
 
@@ -216,7 +220,7 @@ def main(project_directory):
     project_dir = os.path.abspath(project_directory)
 
     tools = [read_file, write_to_file, run_terminal_command]
-    agent = ReActAgent(tools=tools, model="openai/gpt-4o", project_directory=project_dir)
+    agent = ReActAgent(tools=tools, model=ModelId, project_directory=project_dir)
 
     task = input("请输入任务：")
 
