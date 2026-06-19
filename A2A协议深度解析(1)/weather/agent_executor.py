@@ -13,7 +13,7 @@ class WeatherAgentExecutor(AgentExecutor):
         event_queue: EventQueue,
     ) -> None:
         text="""未来 3 天的天气如下：1. 明天（2025年6月1日）：晴天；2. 后天（2025年6月2日）：小雨；3. 大后天（2025年6月3日）：大雨。"""
-        event_queue.enqueue_event(
+        await event_queue.enqueue_event(
             completed_task(
                 context.task_id,
                 context.context_id,
